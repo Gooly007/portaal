@@ -15,7 +15,7 @@
                     @endif
                         {{ Auth::guard('admin')->check() }}
                     <p>Welcome Mr./Mst : <strong>{{ Auth::guard('admin')->user()->name }}</strong></p>
-                    <p>Your joined  : {{ Auth::guard('admin')->user()->created_at->diffForHumans() }} </p>
+                    <p>You joined  : {{ Auth::guard('admin')->user()->created_at->diffForHumans() }} </p>
                 </div>
             </div>
         </div>

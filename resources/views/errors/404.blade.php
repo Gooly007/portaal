@@ -10,7 +10,7 @@
 
 <!-- Content of page -->
 @section('content')
-<!-- Content -->      
+<!-- Content -->
     <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-lg-12">
@@ -18,9 +18,9 @@
                             <h1>
                                 "Sorry. De pagina die je zoekt is niet beschikbaar."
                             </h1>
-                            <small>
+                            <!-- <small>
                                 <a href="main">Terug Hoofd Pagina</a>
-                            </small>
+                            </small> -->
                         </div>
                     </div>
                 </div>

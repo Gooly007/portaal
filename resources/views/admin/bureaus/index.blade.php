@@ -1,5 +1,5 @@
 <!-- Extend the layout -->
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 <!-- Assign page title -->
 @section('title', 'Bureaus')
@@ -12,7 +12,7 @@
 @section('content')
   <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Bureaus Overzicht - &nbsp;
@@ -21,9 +21,9 @@
                     </div>
 
                     <div class="ibox-content">
-                        <form action="{{action('BureausController@store')}}" method="post" class="form-horizontal">
-                        {{csrf_field()}}
-                        <input type="hidden" name="username" value="{{ Auth::user()->username }}">
+                        <form action="{{ action('BureausController@store') }}" method="post" class="form-horizontal">
+                        @csrf
+                        <input type="hidden" name="username" value="{{ Auth::guard('admin')->user()->username }}">
                         <div class="form-group"><label class="col-sm-2 control-label">Bureau</label>
                             <div class="col-sm-10"><input type="text" name="name" required></div>
                         </div>
@@ -58,8 +58,14 @@
                         <tr>
                             <td>{{ $blijst->name }}</td>
                             <td>{{ $blijst->description }}</td>
-                            <td><a href="bureaus/{{ $blijst->id }}" class="btn btn-warning btn-xs">Bewerken</a></td>
-                            <td><a href="bureaus/{{ $blijst->id }}/delete" class="btn btn-danger btn-xs">Verwijderen</a></td>
+                            <td><a href="bureaus/{{ $blijst->id }}/edit" class="btn btn-warning btn-sm">{{ __('Edit') }}</a></td>
+                            <td>
+                                <form method="POST" action="/bureaus/{{ $blijst->id }}">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm">{{ __('Delete') }}</button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -119,3 +125,5 @@
     </script>
 
 @endsection
+
+

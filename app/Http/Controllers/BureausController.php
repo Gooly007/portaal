@@ -16,7 +16,7 @@ class BureausController extends Controller
     {
         //
         $bureaus = bureaus::all();
-        return view('bureaus/index', compact('bureaus'));
+        return view('admin/bureaus/index', compact('bureaus'));
     }
 
     /**
@@ -37,7 +37,33 @@ class BureausController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,
+               [
+                   'name' => 'required|min:3',
+                   'description' => 'required|min:3',
+                   'username' => 'required',
+               ]);
+        /* <!-- /resources/views/post/create.blade.php -->
+                 <h1>Create Post</h1>
+                @if (errors->any())
+                    <div class='alert alert-danger'>
+                        <ul>
+                            @foreach (errors->all() as error)
+                                <li>{{ error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+        <!-- Create Post Form --> */
+
         //
+
+        bureaus::create(request(['name', 'description', 'username' ]));
+        return redirect('/bureaus')->with('success', 'Entry added successfully!');
+
+        //$user = (auth()->guard('admin')->user()->username);
+        // return $user;
+
     }
 
     /**
@@ -57,9 +83,14 @@ class BureausController extends Controller
      * @param  \App\Bureaus  $bureaus
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bureaus $bureaus)
+    public function edit(Bureaus $blijst)
     {
         //
+        // $id = bureaus::findOrfail($id);
+
+        return $blijst;
+
+        return view('admin.bureaus.edit', compact('id'));
     }
 
     /**
@@ -69,9 +100,24 @@ class BureausController extends Controller
      * @param  \App\Bureaus  $bureaus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bureaus $bureaus)
+    public function update($id, Request $request)
     {
         //
+        // $this->validate($request,
+        // [
+        //     'name' => 'required|min:3',
+        //     'description' => 'required|min:3',
+        //     'username' => 'required',
+        // ]);
+
+        bureaus::where('id', $id)
+                    ->update(['name' => request('name'),
+                    'description' => request('description'),
+                    'username' => request('username')] );
+
+        return redirect('/bureaus')->with('succes', 'Entry updated!');
+
+        //dd(request()->all());
     }
 
     /**
@@ -80,8 +126,12 @@ class BureausController extends Controller
      * @param  \App\Bureaus  $bureaus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bureaus $bureaus)
+    public function destroy(Bureaus $id)
     {
         //
+        // dd('Delete ' . $id);
+        $id->delete();
+
+        return redirect('/bureaus')->with('success', 'Entry deleted!');
     }
 }

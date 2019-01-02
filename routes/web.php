@@ -27,10 +27,17 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/bureaus', 'BureausController@index')->name('bureaus');
-Route::post('/bureaus', 'BureausController@store')->name('bureaus');
+Route::get('/bureaus/create', 'BureausConrtoller@create')->name('bureaus');
 Route::get('/bureaus/{id}', 'BureausController@show')->name('bureaus');
+Route::post('/bureaus', 'BureausController@store')->name('bureaus');
+Route::get('bureaus/{id}/edit', 'BureausController@edit')->name('bureaus');
 Route::patch('/bureaus/{id}', 'BureausController@update')->name('bureaus');
-Route::get('/bureaus/{id}/delete', 'BureausController@destroy')->name('bureaus');
+Route::delete('/bureaus/{id}', 'BureausController@destroy')->name('bureaus');
+
+Route::match(['get', 'post'], '/user/profile', function () {
+
+});
+
 
 // Admin Portal
 Route::get('admin-login', 'Auth\AdminLoginController@showLoginForm');

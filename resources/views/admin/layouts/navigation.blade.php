@@ -7,7 +7,9 @@
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <strong class="font-bold">{{ Auth::guard('admin')->user()->name }}</strong>
-                            </span> <span class="text-muted text-xs block">Example menu <b class="caret"></b></span>
+                            </span>
+                            <span class="text-muted">{{ Auth::guard('admin')->user()->username }}</span>
+                            <span class="text-muted text-xs block">{{ __('Options') }}<b class="caret"></b></span>
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -25,14 +27,17 @@
                     IN+
                 </div>
             </li>
-            <li class="{{ isActiveRoute('main') }}">
-                <a href="{{ url('/') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Main view</span></a>
-            </li>
-            <li class="{{ isActiveRoute('minor') }}">
-                <a href="{{ url('/minor') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Minor view</span> </a>
+            <li class="{{ isActiveRoute('dashboard') }}">
+                <a href="{{ route('dashboard') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Home</span> </a>
             </li>
             <li class="{{ isActiveRoute('bureaus') }}">
                 <a href="{{ url('/bureaus') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Bureaus</span> </a>
+            </li>
+            <li class="{{ isActiveRoute('teamleader') }}">
+                <a href="{{ url('/teamleader') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ __('Team Leader') }}</span> </a>
+            </li>
+            <li class="{{ isActiveRoute('employee') }}">
+                <a href="{{ url('/employee') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ __('Employee') }}</span> </a>
             </li>
         </ul>
 

@@ -26,23 +26,28 @@
                 </div>
             </li>
             <li class="{{ isActiveRoute('main') }}">
-                <a href="{{ url('/') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Rooster</span></a>
+                <a href="{{ url('/home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Rooster</span></a>
             </li>
             <li class="{{ isActiveRoute('mutaties') }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Mutaties</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="{{ isActiveRoute('#') }}">
-                        <a href="#"><span class="nav-label">Vakantie</span></a>
+                    <li class="{{ isActiveRoute('vacation') }}">
+                        <a href="#"><span class="nav-label">{{ __('Vacation') }}</span></a>
                     </li>
                 </ul>
                 <ul class="nav nav-second-level collapse">
-                    <li class="{{ isActiveRoute('#') }}">
-                        <a href="#"><span class="nav-label">Ziekte</span></a>
+                    <li class="{{ isActiveRoute('sickness') }}">
+                        <a href="#"><span class="nav-label">{{ __('Sickness') }}</span></a>
                     </li>
                 </ul>
                 <ul class="nav nav-second-level collapse">
-                    <li class="{{ isActiveRoute('#') }}">
-                        <a href="#"><span class="nav-label">Verzuim</span></a>
+                    <li class="{{ isActiveRoute('omission') }}">
+                        <a href="#"><span class="nav-label">{{ __('Omission') }}</span></a>
+                    </li>
+                </ul>
+                <ul class="nav nav-second-level collapse">
+                    <li class="{{ isActiveRoute('overtime') }}">
+                        <a href="#"><span class="nav-label">{{ __('overime') }}</span></a>
                     </li>
                 </ul>
             </li>

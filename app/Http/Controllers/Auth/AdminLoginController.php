@@ -46,10 +46,10 @@ class AdminLoginController extends Controller
 
     public function login(Request $request)
     {
-        if (auth()->guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (auth()->guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             // dd(auth()->guard('admin')->user());
             return view('admin.dashboard');
         }
-        return back()->withErrors(['email' => 'Email or password are wrong.']);
+        return back()->withErrors(['username' => 'Username or password are wrong.']);
     }
 }

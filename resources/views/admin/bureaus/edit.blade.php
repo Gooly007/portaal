@@ -1,5 +1,5 @@
 <!-- Extend the layout -->
-@extends('layouts.algemeen')
+@extends('admin.layouts.app')
 
 <!-- Assign page title -->
 @section('title', 'Bureau Bewerken')
@@ -20,16 +20,16 @@
                         </h5>
                     </div>
                     <div class="ibox-content">
-                        <form action="/kpc2/bureaus/{{ $id->id }}" method="post" class="form-horizontal">
-                        {{ method_field('PATCH') }}
-                        {{ csrf_field() }}
-                        <input type="hidden" name="username" value="{{ Auth::user()->kc_id }}">
-                        <div class="form-group"><label class="col-sm-2 control-label">Naam</label>
-                            <div class="col-sm-10"><input type="text" name="naam" value="{{ $id->naam }}"></div>
+                        <form action="/bureaus/{{ $id->id }}" method="post" class="form-horizontal">
+                        @method('PATCH')
+                        @csrf
+                        <input type="hidden" name="username" value="{{ Auth::guard('admin')->user()->username }}">
+                        <div class="form-group"><label class="col-sm-2 control-label">Bureau</label>
+                            <div class="col-sm-10"><input type="text" name="name" value="{{ $id->name }}"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group"><label class="col-sm-2 control-label">Omschrijving</label>
-                            <div class="col-sm-10"><input type="text" name="omschrijving" value="{{ $id->omschrijving }}"></div>
+                            <div class="col-sm-10"><input type="text" name="description" value="{{ $id->description }}"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                             <div class="form-group">
@@ -37,9 +37,9 @@
                                     <button class="btn btn-primary" type="submit">Opslaan</button>
                                 </div>
                             </div>
-                        
+
                         @include ('layouts.errors')
-                        
+
                         </form>
                     </div>
                 </div>
