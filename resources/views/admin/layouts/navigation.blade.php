@@ -36,8 +36,18 @@
             <li class="{{ isActiveRoute('teamleader') }}">
                 <a href="{{ url('/teamleader') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ __('Team Leader') }}</span> </a>
             </li>
-            <li class="{{ isActiveRoute('employee') }}">
-                <a href="{{ url('/employee') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ __('Employee') }}</span> </a>
+            <li class="{{ isActiveRoute('#') }}">
+                <a href="{{ url('#') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ __('Employee') }}</span> </a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="{{ isActiveRoute('employee') }}">
+                        <a href="{{ url('/employee') }}"><span class="nav-label">{{ __('Overview') }}</span></a>
+                    </li>
+                </ul>
+                <ul class="nav nav-second-level collapse">
+                        <li class="{{ isActiveRoute('employee/create') }}">
+                            <a href="{{ url('/employee/create') }}"><span class="nav-label">{{ __('Add User') }}</span></a>
+                        </li>
+                    </ul>
             </li>
         </ul>
 

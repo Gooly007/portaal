@@ -1,5 +1,5 @@
 <!-- Extend the layout -->
-@extends('layouts.algemeen')
+@extends('admin.layouts.app')
 
 <!-- Assign page title -->
 @section('title', 'Registratie')
@@ -11,7 +11,7 @@
 
 <!-- Content of page -->
 @section('content')
-<!-- Content -->            
+<!-- Content -->
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -39,87 +39,105 @@
                         </div>
                 </div>
                 <div class="ibox-content">
-                                        
-                    <form method="post" id="form" action="persstore">
-                        {{ csrf_field() }}
-                        
+
+                    <form method="POST" id="form" action="{{ '/employee' }}">
+                        @csrf
+
                         @include ('layouts.errors')
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Achternaam *</label>
-                        <div class="col-sm-10"><input id="achternaam" name="achternaam" type="text" value="{{ old('achternaam')}}" class="form-control required"></div>
+
+                        <input id="status" name="status" type="hidden" value="active">
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Last Name') }} *</label>
+                        <div class="col-sm-10"><input id="lastname" name="lastname" type="text" value="{{ old('lastname')}}" class="form-control required"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Meisjesnaam</label>
-                        <div class="col-sm-10"><input id="meisjesnaam" name="meisjesnaam" type="text"class="form-control"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Maiden Name') }}</label>
+                        <div class="col-sm-10"><input id="maidenname" name="maidenname" type="text"class="form-control"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Voornaam *</label>
-                        <div class="col-sm-10"><input id="voornaam" name="voornaam" type="text" value="{{ old('voornaam')}}" class="form-control required"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('First Name') }} *</label>
+                        <div class="col-sm-10"><input id="firstname" name="firstname" type="text" value="{{ old('firstname')}}" class="form-control required"></div>
                     </div>
-                    
+
                     <div class="form-group row"><label class="col-sm-2 col-form-label">Sedula ID *</label>
                         <div class="col-sm-10"><input id="sedula" name="sedula" type="number" value="{{ old('sedula')}}" class="form-control required digits"></div>
                     </div>
-                    
+
                     <div class="form-group row"><label class="col-sm-2 col-form-label">Man / Vrouw *</label>
                         <div class="radio radio-inline">
-                            <div><label><input type="radio" id="vrouw" value="vrouw" name="geslacht">Vrouw</label></div>
-                            <div><label><input type="radio" id="man" value="man" name="geslacht">Man</label></div>
+                            <div><label><input type="radio" id="vrouw" value="vrouw" name="gender">Vrouw</label></div>
+                            <div><label><input type="radio" id="man" value="man" name="gender">Man</label></div>
                         </div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Burgelijkestaat *</label>
-                        <div class="col-sm-10"><select class="form-control m-b-n-sm" name="burgerlijkestaat">
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Marital Status') }} *</label>
+                        <div class="col-sm-10"><select class="form-control m-b-n-sm" name="maritalstatus">
                             <option>Ongehuwd</option>
                             <option>Gehuwd</option>
                         </select></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Aantal Kinderen</label>
-                        <div class="col-sm-10"><input id="aantal_kinderen" name="aantal_kinderen" type="number" value="0" class="form-control required digits"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Total Kids') }}</label>
+                        <div class="col-sm-10"><input id="total_kids" name="total_kids" type="number" value="0" class="form-control required digits"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Geboorte Datum *</label>
-                        <div class="col-sm-10"><input id="geboortedatum" name="geboortedatum" placeholder="mm-dd-yyyy" type="text" disabled="" class="form-control required"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Date of Birth') }} *</label>
+                        <div class="col-sm-10"><input id="birthday" name="birthday" placeholder="mm-dd-yyyy" type="text" class="form-control required"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Geboorte Plaats *</label>
-                        <div class="col-sm-10"><input id="geboorteplaats" name="geboorteplaats" type="text" class="form-control required" value="Curacao"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Birthplace') }} *</label>
+                        <div class="col-sm-10"><input id="birthplace" name="birthplace" type="text" class="form-control required" value="Curacao"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Nationaliteit *</label>
-                        <div class="col-sm-10"><input id="nationaliteit" name="nationaliteit" type="text" class="form-control required" value="Nederlands"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Nationality') }} *</label>
+                        <div class="col-sm-10"><input id="nationality" name="nationality" type="text" class="form-control required" value="Nederlands"></div>
                     </div>
-                                            
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Adres *</label>
-                        <div class="col-sm-10"><input id="adres" name="adres" type="text" class="form-control required"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Address') }} *</label>
+                        <div class="col-sm-10"><input id="address" name="address" type="text" class="form-control required"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Telefoon Thuis</label>
-                        <div class="col-sm-10"><input id="telefoon-t" name="telefoon_thuis" type="text" value="" class="form-control"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Home Phone') }}</label>
+                        <div class="col-sm-10"><input id="tel_home" name="tel_home" type="text" value="" class="form-control"></div>
                     </div>
-                                                                
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Telefoon Mobiel</label>
-                        <div class="col-sm-10"><input id="telefoon-mobiel" name="telefoon_mobiel" type="text" value="" class="form-control"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Mobile') }}</label>
+                        <div class="col-sm-10"><input id="tel_mobile" name="tel_mobile" type="text" value="" class="form-control"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Email Intern</label>
-                        <div class="col-sm-10"><input id="email_intern" name="email_intern" placeholder="voornaam.achternaam@polis.cw" type="email" class="form-control email"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">E-mail {{ __('Internal') }}</label>
+                        <div class="col-sm-10"><input id="email_internal" name="email_internal" placeholder="voornaam.achternaam@polis.cw" type="email" class="form-control email"></div>
                     </div>
-                                            
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Email Prive</label>
-                        <div class="col-sm-10"><input id="email_prive" name="email_prive" type="email" class="form-control email"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">E-mail {{ ('Private') }}</label>
+                        <div class="col-sm-10"><input id="email_private" name="email_private" type="email" class="form-control email"></div>
                     </div>
-                                            
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Rijbewijs</label>
-                        <div class="col-sm-10"><input id="rijbewijs" name="rijbewijs" type="text" class="form-control"></div>
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Drivers License') }}</label>
+                        <div class="col-sm-10"><input id="driverslicense" name="driverslicense" type="text" class="form-control"></div>
                     </div>
-                    
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Login Naam</label>
-                        <div class="col-sm-10"><input id="login_naam" name="login_naam" type="text" class="form-control required" value="{{ $persg->login_naam }}">
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Username') }}</label>
+                        @if ($employee <> '')
+                            <div class="col-sm-10"><input id="username" name="username" type="text" class="form-control required" value="{{ $employee->username }}">
+                        @else
+                            <div class="col-sm-10"><input id="username" name="username" type="text" class="form-control required" value="kc0001">
+                        @endif
                         <span class="form-text m-b-n-none">Login naam is laatst geregistreerd in database en moet aangepast worden.</span></div>
                     </div>
-                    
+
+                    <div class="form-group row"><label class="col-sm-2 col-form-label">{{ __('Permission') }} *</label>
+                        <div class="col-sm-10"><select class="form-control m-b-n-sm" name="role">
+                            <option>Gebruiker</option>
+                            <option>TeamLeader</option>
+                            <option>Afdeling Hoofd</option>
+                        </select></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-2 col-form-label">{{ __('Password') }}</label>
+                        <div class="col-sm-10"><input id="password" name="password" type="password" class="form-control" value="secret"></div>
+                    </div>
+
                     <div class="hr-line-dashed"></div>
                     <div class="form-group row">
                         <div class="col-sm-4 col-sm-offset-2">
@@ -127,7 +145,7 @@
                             <button class="btn btn-primary btn-sm" type="submit">Opslaan</button>
                         </div>
                     </div>
-                                
+
                     </form>
                 </div>
             </div>
@@ -140,18 +158,18 @@
 
     <!-- Steps -->
     <script src="{{ asset('js/plugins/steps/jquery.steps.min.js') }}"></script>
- 
+
     <!-- Jquery Validate -->
     <script src="{{ asset('js/plugins/validate/jquery.validate.min.js') }}"></script>
-    
+
     <!-- iCheck -->
     <script src="{{ asset('js/plugins/iCheck/icheck.min.js') }}"></script>
 
 
                     <script>
                         $(document).ready(function(){
-                        $('#voornaam, #achternaam').keyup(function(){ $('#email_intern').val($('#voornaam').val()+'.'+$('#achternaam').val().replace(/ /g, "")+'@polis.cw'); });
-                        $('#sedula').keyup(function(){ $('#geboortedatum').val($('#sedula').val().replace(/(\d\d\d\d)(\d\d)(\d\d)(\d\d)/,'$2-$3-$1')); });
+                        $('#firstname, #lastname').keyup(function(){ $('#email_internal').val($('#firstname').val()+'.'+$('#lastname').val().replace(/ /g, "")+'@polis.cw'); });
+                        $('#sedula').keyup(function(){ $('#birthday').val($('#sedula').val().replace(/(\d\d\d\d)(\d\d)(\d\d)(\d\d)/,'$1-$2-$3')); });
                         });
                     </script>
 

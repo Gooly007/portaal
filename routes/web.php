@@ -34,6 +34,14 @@ Route::get('bureaus/{id}/edit', 'BureausController@edit')->name('bureaus');
 Route::patch('/bureaus/{id}', 'BureausController@update')->name('bureaus');
 Route::delete('/bureaus/{id}', 'BureausController@destroy')->name('bureaus');
 
+Route::get('/employee', 'EmployeeController@index')->name('employee');
+Route::get('/employee/create', 'EmployeeController@create')->name('employee');
+Route::get('/employee/{id}', 'EmployeeController@show')->name('employee');
+Route::post('/employee', 'EmployeeController@store')->name('employee');
+Route::get('/employee/{id}/edit', 'EmployeeController@edit')->name('employee');
+Route::patch('/employee/{id}', 'EmployeeController@update')->name('employee');
+Route::delete('/employee/{id}', 'EmployeeController@destroy')->name('employee');
+
 Route::match(['get', 'post'], '/user/profile', function () {
 
 });

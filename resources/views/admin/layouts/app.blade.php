@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.css') }}" />
+    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -60,20 +61,24 @@
   <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}" type="text/javascript"></script>
   <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+  <script src="{{ asset('js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+
   <!-- Custom and plugin javascipt -->
   <script src="{{ asset('js/inspinia.js') }}" type="text/javascript"></script>
   <script src="{{ asset('js/plugins/pace/pace.min.js') }}" type="text/javascript"></script>
 
 
 
-  @section('scripts')
-  @show
-
-
     <!-- Remove flash message after couple of seconds -->
     <script>
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
+
+@section('scripts')
+@show
+
 
   </body>
   </html>

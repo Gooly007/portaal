@@ -1,7 +1,7 @@
-@extends('layouts.algemeen')
+@extends('admin.layouts.app')
 
 @section('header')
-    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+
 @endsection
 
 
@@ -13,7 +13,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            <div class="ibox float-e-margins">
+            <div class="ibox">
                 <div class="ibox-title">
                     <h5>Zoeken - &nbsp;
                         <small>Zoek personeel gegevens</small>
@@ -46,23 +46,25 @@
                                     <th>Voornaam</th>
                                     <th>Achternaam</th>
                                     <th>Adres</th>
+                                    <th>Rol</th>
                                 </tr>
                             </thead>
                                 <tbody>
-                                    @foreach ($personeel as $person)
+                                    @foreach ($employee as $person)
                                         <tr>
-                                            <td>{{ $person->sedula }}</td>
-                                            <td><a href="persedit/{{ $person->id }}">{{ $person->login_naam }}</a></td>
-                                            <td>{{ $person->voornaam }}</td>
-                                            <td>{{ $person->achternaam }}</td>
-                                            <td>{{ $person->adres }}</td>
+                                            <td><a href="/employee/{{ $person->id }}">{{ $person->sedula }}</a></td>
+                                            <td>{{ $person->username }}</td>
+                                            <td>{{ $person->firstname }}</td>
+                                            <td>{{ $person->lastname }}</td>
+                                            <td>{{ $person->address }}</td>
+                                            <td>{{ $person->role }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                         </table>
                     </div>
-                </div>  
-                    
+                </div>
+
             </div>
 
         </div>
@@ -72,19 +74,11 @@
 
 @section('scripts')
 
-<link src="{{ asset('js/plugins/peity/angular-peity.js') }}">
-
-<!-- Mainly scripts -->
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-        
-    <!-- Page-Level Scripts -->
-    <script>
+  <!-- Page-Level Scripts -->
+  <script>
         $(document).ready(function(){
             $('.dataTables-example').DataTable({
-                pageLength: 25,
+              pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
@@ -102,7 +96,7 @@
                                     .addClass('compact')
                                     .css('font-size', 'inherit');
                     }
-                    }
+                    },
                 ]
 
             });
